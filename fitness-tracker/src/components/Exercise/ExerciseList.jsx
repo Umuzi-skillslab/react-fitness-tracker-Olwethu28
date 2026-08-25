@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ExerciseCard from './ExerciseCard.jsx';
 import Card from '../UI/Card.jsx';
-import styles from './ExerciseList.module.css';
+import styles from './Exercise.module.css';
 
 const ExerciseList = ({ exercises, onAddExerciseToDay, plannedExerciseIds = [], emptyMessage = 'No exercises found.' }) => {
   if (exercises.length === 0) {

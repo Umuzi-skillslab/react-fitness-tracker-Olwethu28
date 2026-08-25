@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Button from '../UI/Button.jsx';
 import SearchBar from '../UI/SearchBar.jsx';
 import { categories, difficulties, muscleGroups } from '../../data/exercisesData.js';
-import styles from './ExerciseFilter.module.css';
+import styles from './Exercise.module.css';
 
 const ExerciseFilter = ({ filters, resultCount, onFilterChange, onSearchSubmit, onResetFilters }) => {
   const handleSelectChange = (event) => {
