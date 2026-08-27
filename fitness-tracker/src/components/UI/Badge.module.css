@@ -1,0 +1,15 @@
+.badge {
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.strong {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
