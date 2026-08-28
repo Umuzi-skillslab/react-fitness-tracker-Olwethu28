@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/UI/Button.jsx';
 import Card from '../components/UI/Card.jsx';
-import styles from './pages.module.css';
+import styles from './NotFound.module.css';
 
 const NotFound = () => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import Badge from '../UI/Badge.jsx';
 import Button from '../UI/Button.jsx';
 import Card from '../UI/Card.jsx';
 import { weekDays } from '../../utils/storage.js';
-import styles from './Exercise.module.css';
+import styles from './ExerciseCard.module.css';
 
 const ExerciseCard = ({ exercise, onAddExerciseToDay, defaultDay = 'Monday', isPlanned = false }) => {
   const [selectedDay, setSelectedDay] = useState(defaultDay);

@@ -7,7 +7,7 @@ import Button from '../UI/Button.jsx';
 import Card from '../UI/Card.jsx';
 import Header from '../common/Header.jsx';
 import { weekDays } from '../../utils/storage.js';
-import styles from './Exercise.module.css';
+import styles from './ExerciseDetail.module.css';
 
 const ExerciseDetail = ({ exercises, onAddExerciseToDay }) => {
   const { id } = useParams();

@@ -1,0 +1,31 @@
+.entry {
+  box-shadow: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header h3,
+.header p {
+  margin: 0;
+}
+
+.header p,
+.notes {
+  color: var(--color-muted);
+}
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.notes {
+  margin: 12px 0 0;
+  line-height: 1.6;
+}

@@ -7,7 +7,7 @@ import Card from '../components/UI/Card.jsx';
 import Header from '../components/common/Header.jsx';
 import { motivationalAudioUrl } from '../data/exercisesData.js';
 import { calculateWorkoutStreak } from '../utils/storage.js';
-import styles from './pages.module.css';
+import styles from './Home.module.css';
 
 const Home = ({ exercises, categoryCounts, workoutHistory }) => {
   const navigate = useNavigate();

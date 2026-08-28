@@ -1,122 +1,159 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useMemo, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navigation/Navbar.jsx';
+import Footer from './components/common/Footer.jsx';
+import Loading from './components/UI/Loading.jsx';
+import { exercises } from './data/exercisesData.js';
+import Home from './pages/Home.jsx';
+import ExercisesPage from './pages/ExercisesPage.jsx';
+import WorkoutPlannerPage from './pages/WorkoutPlannerPage.jsx';
+import HistoryPage from './pages/HistoryPage.jsx';
+import ProgressPage from './pages/ProgressPage.jsx';
+import NotFound from './pages/NotFound.jsx';
+import ExerciseDetail from './components/Exercise/ExerciseDetail.jsx';
+import {
+  createEmptyWeekPlan,
+  loadWorkoutHistory,
+  loadWorkoutPlan,
+  saveWorkoutHistory,
+  saveWorkoutPlan
+} from './utils/storage.js';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [workoutPlan, setWorkoutPlan] = useState(createEmptyWeekPlan());
+  const [workoutHistory, setWorkoutHistory] = useState([]);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Hydrate persisted state once so the first route render reflects saved user work.
+    setWorkoutPlan(loadWorkoutPlan());
+    setWorkoutHistory(loadWorkoutHistory());
+    setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    // Gate persistence until hydration completes to avoid overwriting existing localStorage.
+    if (isReady) {
+      saveWorkoutPlan(workoutPlan);
+    }
+  }, [isReady, workoutPlan]);
+
+  useEffect(() => {
+    // Workout history is stored separately from the plan because it changes through a different workflow.
+    if (isReady) {
+      saveWorkoutHistory(workoutHistory);
+    }
+  }, [isReady, workoutHistory]);
+
+  const categoryCounts = useMemo(
+    () =>
+      // The home page receives aggregate counts instead of recalculating them during every render.
+      exercises.reduce(
+        (counts, exercise) => ({
+          ...counts,
+          [exercise.category]: (counts[exercise.category] || 0) + 1
+        }),
+        {}
+      ),
+    []
+  );
+
+  const handleAddExerciseToDay = (day, exercise, note = '') => {
+    // Each planned exercise gets an occurrence id so the same exercise can appear more than once.
+    setWorkoutPlan((currentPlan) => ({
+      ...currentPlan,
+      [day]: [
+        ...currentPlan[day],
+        {
+          ...exercise,
+          planItemId: `${exercise.id}-${Date.now()}`,
+          plannedNote: note
+        }
+      ]
+    }));
+  };
+
+  const handleRemoveExerciseFromDay = (day, planItemId) => {
+    setWorkoutPlan((currentPlan) => ({
+      ...currentPlan,
+      [day]: currentPlan[day].filter((exercise) => exercise.planItemId !== planItemId)
+    }));
+  };
+
+  const handleAddWorkoutLog = (entry) => {
+    // New logs are prepended because the history view defaults to newest-first sorting.
+    setWorkoutHistory((history) => [
+      {
+        ...entry,
+        id: `log-${Date.now()}`
+      },
+      ...history
+    ]);
+  };
+
+  const handleDeleteWorkoutLog = (id) => {
+    setWorkoutHistory((history) => history.filter((entry) => entry.id !== id));
+  };
+
+  if (!isReady) {
+    return <Loading message="Loading your training workspace..." />;
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-shell">
+      <Navbar plannedCount={Object.values(workoutPlan).flat().length} />
+      <main className="page-shell">
+        <Routes>
+          <Route
+            path="/"
+            element={<Home exercises={exercises} categoryCounts={categoryCounts} workoutHistory={workoutHistory} />}
+          />
+          <Route
+            path="/exercises"
+            element={
+              <ExercisesPage
+                exercises={exercises}
+                workoutPlan={workoutPlan}
+                onAddExerciseToDay={handleAddExerciseToDay}
+              />
+            }
+          />
+          <Route
+            path="/exercises/:id"
+            element={<ExerciseDetail exercises={exercises} onAddExerciseToDay={handleAddExerciseToDay} />}
+          />
+          <Route
+            path="/workout-planner"
+            element={
+              <WorkoutPlannerPage
+                exercises={exercises}
+                workoutPlan={workoutPlan}
+                onAddExerciseToDay={handleAddExerciseToDay}
+                onRemoveExerciseFromDay={handleRemoveExerciseFromDay}
+              />
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <HistoryPage
+                exercises={exercises}
+                workoutHistory={workoutHistory}
+                onAddWorkoutLog={handleAddWorkoutLog}
+                onDeleteWorkoutLog={handleDeleteWorkoutLog}
+              />
+            }
+          />
+          <Route
+            path="/progress"
+            element={<ProgressPage exercises={exercises} workoutHistory={workoutHistory} workoutPlan={workoutPlan} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+export default App;

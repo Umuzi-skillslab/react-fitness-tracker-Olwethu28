@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button.jsx';
-import styles from './Media.module.css';
+import styles from './AudioPlayer.module.css';
 
 const AudioPlayer = ({ src, title = 'Motivation mix' }) => {
   const audioRef = useRef(null);

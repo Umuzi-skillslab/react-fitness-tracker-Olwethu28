@@ -1,8 +1,3 @@
-.layout {
-  display: grid;
-  gap: 22px;
-}
-
 .featureGrid {
   display: grid;
   gap: 14px;
@@ -55,17 +50,4 @@
   .feature {
     grid-template-columns: 1fr;
   }
-}
-
-.notFound {
-  min-height: 52vh;
-  display: grid;
-  place-items: center;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 16px;
 }

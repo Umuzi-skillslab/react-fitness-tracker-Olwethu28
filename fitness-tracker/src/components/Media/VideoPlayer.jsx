@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button.jsx';
-import styles from './Media.module.css';
+import styles from './VideoPlayer.module.css';
 
 const VideoPlayer = ({ src, title = 'Exercise demonstration', poster = '' }) => {
   const videoRef = useRef(null);

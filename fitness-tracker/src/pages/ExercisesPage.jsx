@@ -5,7 +5,7 @@ import ExerciseList from '../components/Exercise/ExerciseList.jsx';
 import Card from '../components/UI/Card.jsx';
 import Loading from '../components/UI/Loading.jsx';
 import Header from '../components/common/Header.jsx';
-import styles from './pages.module.css';
+import styles from './ExercisesPage.module.css';
 
 const defaultFilters = {
   search: '',
