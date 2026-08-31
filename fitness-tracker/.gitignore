@@ -8,6 +8,7 @@ pnpm-debug.log*fixed: git
 lerna-debug.log*
 
 node_modules
+.github
 dist
 dist-ssr
 *.local

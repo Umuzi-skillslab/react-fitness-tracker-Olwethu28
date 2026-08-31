@@ -2,26 +2,26 @@
 
 
 /*import pushUpVideo from '/assets/videos/pushups-tutorial.mp4';
-import dumbbellRowVideo from '/assets/videos/dumbbellrow-tutorial.mp4';
-import gobletSquatVideo from '/assets/videos/gobletsquats-tutorial.mp4';
-import benchPressVideo from '/assets/videos/bench-press-tutorial.mp4';
-import bosuSquatVideo from '/assets/videos/bosusquats-tutorial.mp4';
-import burpeesVideo from '/assets/videos/burpees-tutorial.mp4';
-import deadliftVideo from '/assets/videos/deadlift-tutorial.mp4';
-import hamstringStretchVideo from '/assets/videos/humstring-stretch-tutorial.mp4';
-import hipFlexorStretchVideo from '/assets/videos/hip-flexor-stretch-tutorial.mp4';
-import jumpRopeVideo from '/assets/videos/jump-rope tutorial.mp4';
-import pigeonPoseVideo from '/assets/videos/pigeon-pose-tutorial.mp4';
-import plankVideo from '/assets/videos/plank-tutorial.mp4';
-import pullUpVideo from '/assets/videos/pullups-tutorial.mp4';
-import rowingMachineVideo from '/assets/videos/rowing-machine-tutorial.mp4';
-import shoulderPressVideo from '/assets/videos/shoulder-press-tutorial.mp4';
-import singleLegStandVideo from '/assets/videos/single-leg-stand-tutorial.mp4';
-import stairClimberVideo from '/assets/videos/stair-climber-tutorial.mp4';
-import stationaryCyclingVideo from '/assets/videos/stationary-cycling-tutorial.mp4';
-import thoracicRotationVideo from '/assets/videos/thoracic-rotation-tutorial.mp4';
-import treadmillRunVideo from '/assets/videos/treadmill-run-tutorial.mp4';
-import warriorThreeVideo from '/assets/videoss/warrior-three-tutorial.mp4';*/
+import dumbbellRowVideo from ;
+import gobletSquatVideo from ;
+import benchPressVideo from ;
+import bosuSquatVideo from ;
+import burpeesVideo from ;
+import deadliftVideo from ;
+import hamstringStretchVideo from ;
+import hipFlexorStretchVideo from ;
+import jumpRopeVideo from ;
+import pigeonPoseVideo from ;
+import plankVideo from ;
+import pullUpVideo from ;
+import rowingMachineVideo from 
+import shoulderPressVideo from ;
+import singleLegStandVideo from ';
+import stairClimberVideo from ;
+import stationaryCyclingVideo from ;
+import thoracicRotationVideo from ;
+import treadmillRunVideo from ;
+import warriorThreeVideo from ;*/
 
 
 
@@ -54,7 +54,7 @@ export const exercises = [
     equipment: 'Bodyweight',
     caloriesBurn: 80,
     image: '/assets/images/push_ups.jpeg',
-    //videoUrl: pushUpVideo
+    videoUrl: '/assets/videos/pushups-tutorial.mp4'
   },
   {
     id: 'dumbbell-row',
@@ -73,7 +73,7 @@ export const exercises = [
     equipment: 'Dumbbell',
     caloriesBurn: 95,
     image: '/assets/images/dumbbell.jpeg',
-    //videoUrl: dumbbellRowVideo
+    videoUrl: '/assets/videos/dumbbellrow-tutorial.mp4'
   },
   {
     id: 'goblet-squat',
@@ -92,7 +92,7 @@ export const exercises = [
     equipment: 'Dumbbell or kettlebell',
     caloriesBurn: 110,
     image: '/assets/images/goblet.jpeg',
-    //videoUrl: gobletSquatVideo
+    videoUrl: '/assets/videos/gobletsquats-tutorial.mp4'
   },
   {
     id: 'shoulder-press',
@@ -111,7 +111,7 @@ export const exercises = [
     equipment: 'Dumbbells',
     caloriesBurn: 90,
     image: '/assets/images/shoulder_press.jpeg',
-    //videoUrl: shoulderPressVideo
+    videoUrl: '/assets/videos/shoulder-press-tutorial.mp4'
   },
   {
     id: 'deadlift',
@@ -130,7 +130,7 @@ export const exercises = [
     equipment: 'Barbell',
     caloriesBurn: 160,
     image: '/assets/images/deadlift.jpeg',
-    //videoUrl: deadliftVideo
+    videoUrl: '/assets/videos/deadlift-tutorial.mp4'
   },
   {
     id: 'bench-press',
@@ -149,7 +149,7 @@ export const exercises = [
     equipment: 'Barbell and bench',
     caloriesBurn: 115,
     image: '/assets/images/bench_press.jpeg',
-    //videoUrl: benchPressVideo
+    videoUrl: '/assets/videos/bench-press-tutorial.mp4'
   },
   {
     id: 'pull-up',
@@ -168,7 +168,7 @@ export const exercises = [
     equipment: 'Pull-up bar',
     caloriesBurn: 105,
     image: '/assets/images/pull_ups.jpeg',
-    //videoUrl: pullUpVideo
+    videoUrl: '/assets/videos/pullups-tutorial.mp4'
   },
   {
     id: 'plank',
@@ -187,7 +187,7 @@ export const exercises = [
     equipment: 'Bodyweight',
     caloriesBurn: 60,
     image: '/assets/images/plank.jpeg',
-    //videoUrl: plankVideo
+    videoUrl: '/assets/videos/plank-tutorial.mp4'
   },
   {
     id: 'treadmill-run',
@@ -206,7 +206,7 @@ export const exercises = [
     equipment: 'Treadmill',
     caloriesBurn: 280,
     image: '/assets/images/treadmill_run.jpeg',
-    //videoUrl: treadmillRunVideo
+    videoUrl: '/assets/videos/treadmill-run-tutorial.mp4'
   },
   {
     id: 'jump-rope',
@@ -225,7 +225,7 @@ export const exercises = [
     equipment: 'Jump rope',
     caloriesBurn: 180,
     image: '/assets/images/jump_rope.jpeg',
-    //videoUrl: jumpRopeVideo
+    videoUrl: '/assets/videos/jump-rope tutorial.mp4'
   },
   {
     id: 'cycling',
@@ -244,7 +244,7 @@ export const exercises = [
     equipment: 'Stationary bike',
     caloriesBurn: 240,
     image: '/assets/images/stationary_cycling.jpeg',
-    //videoUrl: stationaryCyclingVideo
+    videoUrl: '/assets/videos/stationary-cycling-tutorial.mp4'
   },
   {
     id: 'rowing-machine',
@@ -263,7 +263,7 @@ export const exercises = [
     equipment: 'Rowing machine',
     caloriesBurn: 230,
     image: '/assets/images/rowing_machine.jpeg',
-    //videoUrl: rowingMachineVideo
+    videoUrl: '/assets/videos/rowing-machine-tutorial.mp4'
   },
   {
     id: 'burpees',
@@ -282,7 +282,7 @@ export const exercises = [
     equipment: 'Bodyweight',
     caloriesBurn: 210,
     image: '/assets/images/burpees.jpeg',
-    //videoUrl: burpeesVideo
+    videoUrl: '/assets/videos/burpees-tutorial.mp4'
   },
   {
     id: 'stair-climber',
@@ -301,7 +301,7 @@ export const exercises = [
     equipment: 'Stair climber',
     caloriesBurn: 260,
     image: '/assets/images/stair_climber.webp',
-    //videoUrl: stairClimberVideo
+    videoUrl: '/assets/videos/stair-climber-tutorial.mp4'
   },
   {
     id: 'hamstring-stretch',
@@ -320,7 +320,7 @@ export const exercises = [
     equipment: 'Mat',
     caloriesBurn: 25,
     image: '/assets/images/hamstring_stretch.jpeg',
-    //videoUrl: hamstringStretchVideo
+    videoUrl: '/assets/videos/hamstring-stretch-tutorial.mp4'
   },
   {
     id: 'thoracic-rotation',
@@ -339,7 +339,7 @@ export const exercises = [
     equipment: 'Mat',
     caloriesBurn: 35,
     image: '/assets/images/thoracic_rotation.jpeg',
-    //videoUrl: thoracicRotationVideo
+    videoUrl: '/assets/videos/thoracic-rotation-tutorial.mp4'
   },
   {
     id: 'hip-flexor-stretch',
@@ -358,7 +358,7 @@ export const exercises = [
     equipment: 'Mat',
     caloriesBurn: 28,
     image: '/assets/images/hip_flexor_stretch.jpeg',
-    //videoUrl: hipFlexorStretchVideo
+    videoUrl: '/assets/videos/hip-flexor-stretch-tutorial.mp4'
   },
   {
     id: 'pigeon-pose',
@@ -377,7 +377,7 @@ export const exercises = [
     equipment: 'Mat',
     caloriesBurn: 30,
     image: '/assets/images/pigeon_pose.jpeg',
-    //videoUrl: pigeonPoseVideo
+    videoUrl: '/assets/videos/pigeon-pose-tutorial.mp4'
   },
   {
     id: 'single-leg-stand',
@@ -396,7 +396,7 @@ export const exercises = [
     equipment: 'Bodyweight',
     caloriesBurn: 35,
     image: '/assets/images/single_leg_stand.jpeg',
-    //videoUrl: singleLegStandVideo
+    videoUrl: '/assets/videos/single-leg-stand-tutorial.mp4'
   },
   {
     id: 'bosu-squat',
@@ -415,7 +415,7 @@ export const exercises = [
     equipment: 'BOSU trainer',
     caloriesBurn: 85,
     image: '/assets/images/bosusquat.jpg',
-    //videoUrl: bosuSquatVideo
+    videoUrl: '/assets/videos/bosusquats-tutorial.mp4'
   },
   {
     id: 'warrior-three',
@@ -434,6 +434,6 @@ export const exercises = [
     equipment: 'Bodyweight',
     caloriesBurn: 45,
     image: '/assets/images/warrior_three.jpeg',
-    //videoUrl: warriorThreeVideo
+    videoUrl: '/assets/videos/warrior-three-tutorial.mp4'
   }
 ];
