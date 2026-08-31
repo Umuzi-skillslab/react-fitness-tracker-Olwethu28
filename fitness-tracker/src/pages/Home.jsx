@@ -5,7 +5,7 @@ import Badge from '../components/UI/Badge.jsx';
 import Button from '../components/UI/Button.jsx';
 import Card from '../components/UI/Card.jsx';
 import Header from '../components/common/Header.jsx';
-import { motivationalAudioUrl } from '../data/exercisesData.js';
+//import { motivationalAudioUrl } from '../data/exercisesData.js';
 import { calculateWorkoutStreak } from '../utils/storage.js';
 import styles from './Home.module.css';
 
@@ -71,9 +71,9 @@ const Home = ({ exercises, categoryCounts, workoutHistory }) => {
             </div>
           </Card>
 
-          <Card title="Motivation audio" tone="accent">
+          {/*<Card title="Motivation audio" tone="accent">
             <AudioPlayer src={motivationalAudioUrl} title="Member workout mix" />
-          </Card>
+          </Card>*/}
         </aside>
       </div>
     </>
