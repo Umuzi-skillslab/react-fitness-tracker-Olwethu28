@@ -1,37 +1,3 @@
-
-
-
-/*import pushUpVideo from '/assets/videos/pushups-tutorial.mp4';
-import dumbbellRowVideo from ;
-import gobletSquatVideo from ;
-import benchPressVideo from ;
-import bosuSquatVideo from ;
-import burpeesVideo from ;
-import deadliftVideo from ;
-import hamstringStretchVideo from ;
-import hipFlexorStretchVideo from ;
-import jumpRopeVideo from ;
-import pigeonPoseVideo from ;
-import plankVideo from ;
-import pullUpVideo from ;
-import rowingMachineVideo from 
-import shoulderPressVideo from ;
-import singleLegStandVideo from ';
-import stairClimberVideo from ;
-import stationaryCyclingVideo from ;
-import thoracicRotationVideo from ;
-import treadmillRunVideo from ;
-import warriorThreeVideo from ;*/
-
-
-
-
-
-
-
-
-
-
 export const categories = ['Strength', 'Cardio', 'Flexibility', 'Balance'];
 export const difficulties = ['Beginner', 'Intermediate', 'Advanced'];
 export const muscleGroups = ['Chest', 'Back', 'Shoulders', 'Arms', 'Core', 'Legs'];
