@@ -72,7 +72,7 @@ export const exercises = [
     ],
     equipment: 'Dumbbell',
     caloriesBurn: 95,
-    image:  '/assets/images/dumbbell.jpeg',
+    image: '/assets/images/dumbbell.jpeg',
     //videoUrl: dumbbellRowVideo
   },
   {
