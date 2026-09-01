@@ -74,7 +74,7 @@ const Home = ({ exercises, categoryCounts, workoutHistory }) => {
             <AudioPlayer src={'/assets/audios/Morning-Motivation.mp3'}/>
           </Card>
           <Card  tone="accent">
-            <AudioPlayer src={'/assets/audios/Morning-Motivation.mp3'} />
+            <AudioPlayer src={'/assets/audios/Cool-Down-And-Recover.mp3'} />
           </Card>
         </aside>
       </div>
