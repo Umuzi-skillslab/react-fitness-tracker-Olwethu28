@@ -67,9 +67,12 @@ App
 │
 └── Footer
 ```
+
 # Key nesting example
+
 ExercisesPage → ExerciseList → ExerciseCard demonstrates a three-level component hierarchy. WorkoutPlannerPage
  → WorkoutPlanner → DayCard follows the same composition approach.
+
 ---
 
 # 2. Data Flow and Component communication
@@ -125,16 +128,46 @@ Workout Planner
 
 # 3. Components Found in the Project Structure
 
-| Group | Components |
-|---|---|
-| Navigation | `Navbar` |
-| Exercise | `ExerciseCard`, `ExerciseDetail`, `ExerciseFilter`, `ExerciseList` |
-| Workout Planner | `WorkoutPlanner`, `DayCard` |
-| Workout Log | `WorkoutLog`, `LogEntry`, `ProgressChart` |
-| Media | `VideoPlayer`, `AudioPlayer` |
-| UI | `Badge`, `Button`, `Card`, `Loading`, `Modal`, `SearchBar` |
-| Common | `Header`, `Footer` |
-| Pages | `Home`, `ExercisesPage`, `WorkoutPlannerPage`, `HistoryPage`, `ProgressPage`, `NotFound` |
+Navigation: `Navbar`
+
+Exercise:
+- `ExerciseCard`
+- `ExerciseDetail`
+- `ExerciseFilter`
+- `ExerciseList`
+
+Workout Planner:
+- `WorkoutPlanner`
+- `DayCard`
+
+Workout Log:
+- `WorkoutLog`
+- `LogEntry`
+- `ProgressChart`
+
+Media:
+- `VideoPlayer`
+- `AudioPlayer`
+
+UI:
+- `Badge`
+- `Button`
+- `Card`
+- `Loading`
+- `Modal`
+- `SearchBar`
+
+Common:
+- `Header`
+- `Footer`
+
+Pages:
+- `Home`
+- `ExercisesPage`
+- `WorkoutPlannerPage`
+- `HistoryPage`
+- `ProgressPage`
+- `NotFound`
 
 ## Component Purposes
 
@@ -183,17 +216,41 @@ UI components provide reusable presentation and interaction primitives across fe
 
 The props documented below follow the communication paths described in the repository's existing planning design.
 
-| Parent → Child | Main props / data flow | Child → Parent communication |
-|---|---|---|
-| `App → Route Pages` | `exercises`, `workoutPlan`, `workoutHistory`, shared handlers | Pages trigger shared handlers |
-| `ExercisesPage → ExerciseList` | filtered exercise array, add/select handlers | Selection and add actions |
-| `ExerciseList → ExerciseCard` | individual exercise, display state, callbacks | Card invokes select/add callbacks |
-| `ExerciseDetail` | route exercise ID and add-to-day action | Requests exercise addition |
-| `WorkoutPlanner → DayCard` | weekday name and that day's exercise array | Remove and preview actions |
-| `HistoryPage → WorkoutLog` | workout history/log data | Form and deletion actions |
-| `WorkoutLog → LogEntry` | individual workout record | Entry-level actions |
-| `ProgressPage → ProgressChart` | `workoutPlan` and `workoutHistory` | Derived display data |
-| `Feature components → UI children` | labels, variants, styles, event handlers | UI invokes supplied handlers |
+App → Route Pages  
+Main props / data flow: `exercises`, `workoutPlan`, `workoutHistory`, shared handlers  
+Child → Parent communication: Pages trigger shared handlers
+
+ExercisesPage → ExerciseList  
+Main props / data flow: filtered exercise array, add/select handlers  
+Child → Parent communication: Selection and add actions
+
+ExerciseList → ExerciseCard  
+Main props / data flow: individual exercise, display state, callbacks  
+Child → Parent communication: Card invokes select/add callbacks
+
+ExerciseDetail  
+Main props / data flow: route exercise ID and add-to-day action  
+Child → Parent communication: Requests exercise addition
+
+WorkoutPlanner → DayCard  
+Main props / data flow: weekday name and that day's exercise array  
+Child → Parent communication: Remove and preview actions
+
+HistoryPage → WorkoutLog  
+Main props / data flow: workout history/log data  
+Child → Parent communication: Form and deletion actions
+
+WorkoutLog → LogEntry  
+Main props / data flow: individual workout record  
+Child → Parent communication: Entry-level actions
+
+ProgressPage → ProgressChart  
+Main props / data flow: `workoutPlan` and `workoutHistory`  
+Child → Parent communication: Derived display data
+
+Feature components → UI children  
+Main props / data flow: labels, variants, styles, event handlers  
+Child → Parent communication: UI invokes supplied handlers
 
 ### Simplified Props Flow
 
@@ -276,16 +333,29 @@ localStorage
 
 # 6. Testing Strategy Based on the Project Structure
 
-| Component Type | Testing Focus |
-|---|---|
-| Reusable UI | Rendering, props, children, variants, click/focus/keyboard behaviour |
-| Exercise components | Filtering, search results, empty states, detail rendering, route parameters and add-to-plan callbacks |
-| Workout Planner | Adding/removing exercises, weekday data flow, preview modal and planner updates |
-| Workout Log / History | Form submission, deletion, draft persistence and `LogEntry` rendering |
-| Progress | Totals, streak, calories, category mix, loading, empty and error states |
-| Routing | Main routes, navigation and 404 `NotFound` rendering |
-| Media | Video/audio controls and safe fallback behaviour |
-| Integration | Exercise → callback → App state → Workout Planner update; history/progress interactions |
+Reusable UI  
+Testing Focus: Rendering, props, children, variants, click/focus/keyboard behaviour
+
+Exercise components  
+Testing Focus: Filtering, search results, empty states, detail rendering, route parameters and add-to-plan callbacks
+
+Workout Planner  
+Testing Focus: Adding/removing exercises, weekday data flow, preview modal and planner updates
+
+Workout Log / History  
+Testing Focus: Form submission, deletion, draft persistence and `LogEntry` rendering
+
+Progress  
+Testing Focus: Totals, streak, calories, category mix, loading, empty and error states
+
+Routing  
+Testing Focus: Main routes, navigation and 404 `NotFound` rendering
+
+Media  
+Testing Focus: Video/audio controls and safe fallback behaviour
+
+Integration  
+Testing Focus: Exercise → callback → App state → Workout Planner update; history/progress interactions
 
 ## Coverage Target
 
