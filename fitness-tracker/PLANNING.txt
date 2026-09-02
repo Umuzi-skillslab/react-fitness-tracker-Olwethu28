@@ -1,0 +1,392 @@
+# Fitness Tracker and Workout Planner Project Planning Document
+
+This is a React planning document covering component architecture, data flow, props, state management, and testing strategy
+
+---
+
+# 1. Component Hierarchy
+
+The application follows a parent-to-child component structure. App acts as the main application shell and provides routing
+and shared state to the page-level components. Pages then compose feature-specific and reusable UI components.
+
+```text
+App
+├── Navbar
+├── Routes
+│   ├── Home
+│   │   ├── Header
+│   │   ├── Card
+│   │   │   └── Badge
+│   │   ├── AudioPlayer
+│   │   │   └── Button
+│   │
+│   ├── ExercisesPage
+│   │   ├── Header
+│   │   ├── ExerciseFilter
+│   │   │   ├── SearchBar
+│   │   │   └── Button
+│   │   └── ExerciseList
+│   │       └── ExerciseCard
+│   │           ├── Card
+│   │           ├── Badge
+│   │           └── Button
+│   │
+│   ├── ExerciseDetail
+│   │   ├── Header
+│   │   ├── Card
+│   │   └── VideoPlayer
+│   │       └── Button
+│   │
+│   ├── WorkoutPlannerPage
+│   │   ├── Header
+│   │   └── WorkoutPlanner
+│   │       ├── Card
+│   │       └── DayCard
+│   │           ├── Card
+│   │           ├── Badge
+│   │           ├── Button
+│   │           └── Modal
+│   │
+│   ├── HistoryPage
+│   │   ├── Header
+│   │   └── WorkoutLog
+│   │       └── LogEntry
+│   │           ├── Card
+│   │           ├── Badge
+│   │           └── Button
+│   │
+│   ├── ProgressPage
+│   │   ├── Header
+│   │   └── ProgressChart
+│   │       ├── Card
+│   │       └── Badge
+│   │
+│   └── NotFound
+│       ├── Card
+│       └── Button
+│
+└── Footer
+```
+
+# Key nesting example
+
+ExercisesPage → ExerciseList → ExerciseCard demonstrates a three-level component hierarchy. WorkoutPlannerPage
+ → WorkoutPlanner → DayCard follows the same composition approach.
+
+---
+
+# 2. Data Flow and Component communication
+
+The application uses React's one-way data flow. State is stored at the closest common parent that needs to share it. Data
+moves downward through props, while child components communicate upward through callback functions.
+
+```text
+exercisesData
+      ↓
+     App
+      ↓
+ Route Pages
+      ↓
+Feature Components
+      ↓
+Reusable UI
+
+      ↑
+      │
+callback props / user actions
+      │
+      ↓
+
+App state
+      ↓
+useEffect persistence
+      ↓
+localStorage
+```
+
+### Sibling Communication Example
+
+An exercise can be selected or added from the exercise area. The callback updates shared state in `App`.
+
+The `WorkoutPlanner` receives the updated `workoutPlan` through props, allowing another route/page to display the same changed data.
+
+```text
+Exercise Area
+     │
+     │ select / add
+     ↓
+ callback
+     ↓
+   App state
+     ↓
+ workoutPlan
+     ↓
+Workout Planner
+```
+
+---
+
+# 3. Components Found in the Project Structure
+
+Navigation: `Navbar`
+
+Exercise:
+- `ExerciseCard`
+- `ExerciseDetail`
+- `ExerciseFilter`
+- `ExerciseList`
+
+Workout Planner:
+- `WorkoutPlanner`
+- `DayCard`
+
+Workout Log:
+- `WorkoutLog`
+- `LogEntry`
+- `ProgressChart`
+
+Media:
+- `VideoPlayer`
+- `AudioPlayer`
+
+UI:
+- `Badge`
+- `Button`
+- `Card`
+- `Loading`
+- `Modal`
+- `SearchBar`
+
+Common:
+- `Header`
+- `Footer`
+
+Pages:
+- `Home`
+- `ExercisesPage`
+- `WorkoutPlannerPage`
+- `HistoryPage`
+- `ProgressPage`
+- `NotFound`
+
+## Component Purposes
+
+### Exercise Components
+
+**ExerciseCard**  
+Presents a summary of one exercise and exposes selection or add-to-plan actions.
+
+**ExerciseList**  
+Transforms an exercise array into multiple `ExerciseCard` components.
+
+**ExerciseFilter + SearchBar**  
+Collect filter/search input used to narrow displayed exercise data.
+
+**ExerciseDetail**  
+Displays detailed information for an exercise selected through routing.
+
+### Workout Planner Components
+
+**WorkoutPlanner**  
+Coordinates the weekly plan and passes day-specific data to `DayCard` components.
+
+**DayCard**  
+Represents a weekday, its exercises, and actions such as remove or preview.
+
+### Workout Log Components
+
+**WorkoutLog + LogEntry**  
+Handles completed workout records and displays individual history entries.
+
+**ProgressChart**  
+Displays derived progress information using workout-plan and history data.
+
+### Media Components
+
+**VideoPlayer / AudioPlayer**  
+Provide multimedia controls for demonstrations and motivational audio.
+
+### UI Components
+
+UI components provide reusable presentation and interaction primitives across feature areas.
+
+---
+
+# 4. Props Flow for Main Components
+
+The props documented below follow the communication paths described in the repository's existing planning design.
+
+App → Route Pages  
+Main props / data flow: `exercises`, `workoutPlan`, `workoutHistory`, shared handlers  
+Child → Parent communication: Pages trigger shared handlers
+
+ExercisesPage → ExerciseList  
+Main props / data flow: filtered exercise array, add/select handlers  
+Child → Parent communication: Selection and add actions
+
+ExerciseList → ExerciseCard  
+Main props / data flow: individual exercise, display state, callbacks  
+Child → Parent communication: Card invokes select/add callbacks
+
+ExerciseDetail  
+Main props / data flow: route exercise ID and add-to-day action  
+Child → Parent communication: Requests exercise addition
+
+WorkoutPlanner → DayCard  
+Main props / data flow: weekday name and that day's exercise array  
+Child → Parent communication: Remove and preview actions
+
+HistoryPage → WorkoutLog  
+Main props / data flow: workout history/log data  
+Child → Parent communication: Form and deletion actions
+
+WorkoutLog → LogEntry  
+Main props / data flow: individual workout record  
+Child → Parent communication: Entry-level actions
+
+ProgressPage → ProgressChart  
+Main props / data flow: `workoutPlan` and `workoutHistory`  
+Child → Parent communication: Derived display data
+
+Feature components → UI children  
+Main props / data flow: labels, variants, styles, event handlers  
+Child → Parent communication: UI invokes supplied handlers
+
+### Simplified Props Flow
+
+```text
+App
+ │
+ ├── exercises ───────────────→ ExercisesPage
+ │                                  ↓
+ │                            ExerciseList
+ │                                  ↓
+ │                            ExerciseCard
+ │
+ ├── workoutPlan ────────────→ WorkoutPlannerPage
+ │                                  ↓
+ │                            WorkoutPlanner
+ │                                  ↓
+ │                              DayCard
+ │
+ └── workoutHistory ─────────→ HistoryPage / ProgressPage
+                                    ↓
+                              WorkoutLog
+                              ProgressChart
+```
+
+---
+
+# 5. State Management Strategy
+
+## Shared Persisted State
+
+Shared persisted state is kept in `App`:
+
+- Weekly workout plan
+- Workout history
+
+`useEffect` hydrates these values from `localStorage` and saves future changes.
+
+```text
+localStorage
+     ↓
+  App state
+     ↓
+ ┌───┼───────────────┐
+ ↓   ↓               ↓
+Planner History   Progress
+```
+
+## Feature/UI State
+
+The following state is kept close to the components that use it:
+
+- Search text
+- Filters
+- Selected exercise/day
+- Notes
+- Modal preview
+- Workout-log form fields
+- Sorting
+- Loading/error flags
+- Media play/volume state
+- Mobile menu state
+
+### State Update Flow
+
+```text
+User Action
+     ↓
+Component
+     ↓
+Callback
+     ↓
+App state update
+     ↓
+useEffect persistence
+     ↓
+localStorage
+```
+
+---
+
+# 6. Testing Strategy Based on the Project Structure
+
+Reusable UI  
+Testing Focus: Rendering, props, children, variants, click/focus/keyboard behaviour
+
+Exercise components  
+Testing Focus: Filtering, search results, empty states, detail rendering, route parameters and add-to-plan callbacks
+
+Workout Planner  
+Testing Focus: Adding/removing exercises, weekday data flow, preview modal and planner updates
+
+Workout Log / History  
+Testing Focus: Form submission, deletion, draft persistence and `LogEntry` rendering
+
+Progress  
+Testing Focus: Totals, streak, calories, category mix, loading, empty and error states
+
+Routing  
+Testing Focus: Main routes, navigation and 404 `NotFound` rendering
+
+Media  
+Testing Focus: Video/audio controls and safe fallback behaviour
+
+Integration  
+Testing Focus: Exercise → callback → App state → Workout Planner update; history/progress interactions
+
+## Coverage Target
+
+The assignment requires at least **20 tests**, including:
+
+- Component tests
+- Integration tests
+- Interaction tests
+- Routing tests
+- Hook tests
+- Conditional-rendering tests
+- Async tests
+
+The target is **more than 70% component line and branch coverage**.
+
+The repository includes:
+
+- `src/__tests__`
+- `setupTests.js`
+
+as part of the testing architecture.
+
+---
+
+# Conclusion
+
+- The Vite application lives inside `fitness-tracker`.
+- `src` contains feature-based component folders, pages, data, utilities and tests.
+- The `PLANNING.md` defines the intended hierarchy, data flow and state strategy.
+
+This plan establishes a scalable React architecture based on reusable components, clear parent-to-child data flow,
+callback-based communication, lifted shared state, localStorage persistence, and comprehensive testing. The structure is
+designed to support the project's required exercise browsing, workout planning, logging, progress tracking, multimedia,
+routing, and test coverage requirements.

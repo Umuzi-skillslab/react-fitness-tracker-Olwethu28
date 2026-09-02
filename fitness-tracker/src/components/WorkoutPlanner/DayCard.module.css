@@ -1,0 +1,60 @@
+.metrics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+.itemButton {
+  display: grid;
+  gap: 3px;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.itemButton:hover strong {
+  color: var(--color-primary);
+}
+
+.itemButton span,
+.itemButton small,
+.empty {
+  color: var(--color-muted);
+}
+
+.itemButton small {
+  font-style: italic;
+}
+
+.empty {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .item {
+    grid-template-columns: 1fr;
+  }
+}

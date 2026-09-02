@@ -1,0 +1,53 @@
+.search {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 800;
+  color: var(--color-ink);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.controls input {
+  min-height: 42px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  color: var(--color-ink);
+  background: #ffffff;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.controls input:hover {
+  border-color: #9ccbc6;
+}
+
+.controls input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+}
+
+.focused .label {
+  color: var(--color-primary);
+}
+
+.assistive {
+  min-height: 18px;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 520px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
