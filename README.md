@@ -590,7 +590,7 @@ Vite will start the development server and provide a local URL in the terminal.
 
 ---
 
-## 📜 Available Scripts
+## Available Scripts
 
 ### Start Development Server
 
@@ -708,7 +708,7 @@ When contributing to the project, the following practices should be followed:
 
 ## Planning Documentation
 
-The repository contains a `PLANNING.md` file that documents:
+The repository contains a `PLANNING.txt` file that documents:
 
 - Component hierarchy
 - Component relationships
